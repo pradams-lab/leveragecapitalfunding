@@ -1,24 +1,46 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { SiteHeader } from "@/components/site-header";
+import { SiteFooter } from "@/components/site-footer";
+import { Hero } from "@/components/sections/hero";
+import { Ticker } from "@/components/sections/ticker";
+import { About } from "@/components/sections/about";
+import { HowItWorks } from "@/components/sections/how-it-works";
+import { Calculator } from "@/components/sections/calculator";
+import { Testimonials } from "@/components/sections/testimonials";
+import { ApplicationForm } from "@/components/sections/application-form";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+const title = "Leverage Capital Funding | Capital de Giro em até 24 Horas";
+const description =
+  "Adiantamento de recebíveis (MCA) para empresários: liquidez imediata, sem burocracia bancária e sem perda de equity. Aprovação e liberação em até 24 horas.";
+
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-screen">
+      <SiteHeader />
+      <main>
+        <Hero />
+        <Ticker />
+        <About />
+        <HowItWorks />
+        <Calculator />
+        <Testimonials />
+        <ApplicationForm />
+      </main>
+      <SiteFooter />
     </div>
   );
 }
