@@ -1,9 +1,50 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Menu, Phone, X } from "lucide-react";
+import { Menu, Moon, Phone, Sun, X } from "lucide-react";
 import { BrandLock } from "@/components/brand";
 import { useI18n, PHONE, PHONE_HREF } from "@/lib/i18n";
+import { useTheme } from "@/lib/theme";
 import { cn } from "@/lib/utils";
+
+function ThemeToggle({ className }: { className?: string }) {
+  const { theme, toggleTheme } = useTheme();
+  const isDark = theme === "dark";
+  return (
+    <button
+      type="button"
+      onClick={toggleTheme}
+      role="switch"
+      aria-checked={!isDark}
+      aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+      title={isDark ? "Light mode" : "Dark mode"}
+      className={cn(
+        "border-border bg-surface/70 text-muted-foreground hover:text-foreground relative inline-flex h-[1.85rem] w-[3.15rem] items-center rounded-full border p-0.5 backdrop-blur transition-colors duration-300",
+        className,
+      )}
+    >
+      <span
+        className={cn(
+          "bg-[image:var(--gradient-gold)] absolute top-0.5 left-0.5 h-[1.55rem] w-[1.55rem] rounded-full shadow-[var(--shadow-gold)] transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)]",
+          isDark ? "translate-x-0" : "translate-x-[1.3rem]",
+        )}
+      />
+      <span className="relative z-10 flex w-full items-center justify-between px-[0.34rem]">
+        <Moon
+          className={cn(
+            "h-3.5 w-3.5 transition-colors duration-300",
+            isDark ? "text-primary-foreground" : "",
+          )}
+        />
+        <Sun
+          className={cn(
+            "h-3.5 w-3.5 transition-colors duration-300",
+            isDark ? "" : "text-primary-foreground",
+          )}
+        />
+      </span>
+    </button>
+  );
+}
 
 function LanguageToggle({ className }: { className?: string }) {
   const { lang, setLang } = useI18n();
@@ -35,6 +76,7 @@ function LanguageToggle({ className }: { className?: string }) {
     </div>
   );
 }
+
 
 export function SiteHeader() {
   const { t } = useI18n();
