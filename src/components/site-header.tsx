@@ -60,7 +60,7 @@ export function SiteHeader() {
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-500",
         scrolled
-          ? "border-border bg-background/85 border-b shadow-[0_10px_40px_-20px_rgba(0,0,0,.9)] backdrop-blur-xl"
+          ? "border-border bg-background/85 border-b shadow-[var(--shadow-elevated)] backdrop-blur-xl"
           : "border-b border-transparent",
       )}
     >
