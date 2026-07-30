@@ -177,6 +177,8 @@ export function SiteHeader() {
           </a>
           <div className="flex items-center justify-between gap-3 pt-1">
             <LanguageToggle />
+            <ThemeToggle />
+
             <a
               href="/#solicitar"
               onClick={() => setOpen(false)}
