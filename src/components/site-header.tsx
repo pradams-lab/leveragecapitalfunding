@@ -1,9 +1,50 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Menu, Phone, X } from "lucide-react";
+import { Menu, Moon, Phone, Sun, X } from "lucide-react";
 import { BrandLock } from "@/components/brand";
 import { useI18n, PHONE, PHONE_HREF } from "@/lib/i18n";
+import { useTheme } from "@/lib/theme";
 import { cn } from "@/lib/utils";
+
+function ThemeToggle({ className }: { className?: string }) {
+  const { theme, toggleTheme } = useTheme();
+  const isDark = theme === "dark";
+  return (
+    <button
+      type="button"
+      onClick={toggleTheme}
+      role="switch"
+      aria-checked={!isDark}
+      aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+      title={isDark ? "Light mode" : "Dark mode"}
+      className={cn(
+        "border-border bg-surface/70 text-muted-foreground hover:text-foreground relative inline-flex h-[1.85rem] w-[3.15rem] items-center rounded-full border p-0.5 backdrop-blur transition-colors duration-300",
+        className,
+      )}
+    >
+      <span
+        className={cn(
+          "bg-[image:var(--gradient-gold)] absolute top-0.5 left-0.5 h-[1.55rem] w-[1.55rem] rounded-full shadow-[var(--shadow-gold)] transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)]",
+          isDark ? "translate-x-0" : "translate-x-[1.3rem]",
+        )}
+      />
+      <span className="relative z-10 flex w-full items-center justify-between px-[0.34rem]">
+        <Moon
+          className={cn(
+            "h-3.5 w-3.5 transition-colors duration-300",
+            isDark ? "text-primary-foreground" : "",
+          )}
+        />
+        <Sun
+          className={cn(
+            "h-3.5 w-3.5 transition-colors duration-300",
+            isDark ? "" : "text-primary-foreground",
+          )}
+        />
+      </span>
+    </button>
+  );
+}
 
 function LanguageToggle({ className }: { className?: string }) {
   const { lang, setLang } = useI18n();
@@ -36,6 +77,7 @@ function LanguageToggle({ className }: { className?: string }) {
   );
 }
 
+
 export function SiteHeader() {
   const { t } = useI18n();
   const [scrolled, setScrolled] = useState(false);
@@ -60,7 +102,7 @@ export function SiteHeader() {
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-500",
         scrolled
-          ? "border-border bg-background/85 border-b shadow-[0_10px_40px_-20px_rgba(0,0,0,.9)] backdrop-blur-xl"
+          ? "border-border bg-background/85 border-b shadow-[var(--shadow-elevated)] backdrop-blur-xl"
           : "border-b border-transparent",
       )}
     >
@@ -90,6 +132,8 @@ export function SiteHeader() {
             {PHONE}
           </a>
           <LanguageToggle className="hidden sm:flex" />
+          <ThemeToggle />
+
           <a
             href="/#solicitar"
             className="bg-[image:var(--gradient-gold)] text-primary-foreground hidden rounded-full px-5 py-2.5 text-[0.78rem] font-bold tracking-wide shadow-[var(--shadow-gold)] transition-transform duration-300 hover:-translate-y-0.5 sm:inline-flex"
@@ -133,6 +177,8 @@ export function SiteHeader() {
           </a>
           <div className="flex items-center justify-between gap-3 pt-1">
             <LanguageToggle />
+            <ThemeToggle />
+
             <a
               href="/#solicitar"
               onClick={() => setOpen(false)}
