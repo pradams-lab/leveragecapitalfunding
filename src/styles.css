@@ -172,6 +172,41 @@
     -webkit-font-smoothing: antialiased;
   }
 
+  /* Fluid theme transitions across surfaces, text and borders */
+  body,
+  header,
+  footer,
+  section,
+  aside,
+  nav,
+  div,
+  span,
+  p,
+  a,
+  li,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  input,
+  textarea,
+  select,
+  button,
+  svg,
+  label {
+    transition-property: background-color, border-color, color, fill, stroke, box-shadow;
+    transition-duration: 320ms;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      transition-duration: 0.01ms !important;
+    }
+  }
+
   h1,
   h2,
   h3,
@@ -182,9 +217,10 @@
   }
 
   ::selection {
-    background: oklch(0.79 0.115 82 / 30%);
+    background: var(--ring);
   }
 }
+
 
 @utility text-gold {
   background: var(--gradient-gold);
