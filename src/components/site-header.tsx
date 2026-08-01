@@ -131,12 +131,12 @@ export function SiteHeader() {
             <Phone className="h-3.5 w-3.5" />
             {PHONE}
           </a>
-          <LanguageToggle className="hidden sm:flex" />
+          <LanguageToggle />
           <ThemeToggle />
 
           <a
             href="/#solicitar"
-            className="bg-[image:var(--gradient-gold)] text-primary-foreground hidden rounded-full px-5 py-2.5 text-[0.78rem] font-bold tracking-wide shadow-[var(--shadow-gold)] transition-transform duration-300 hover:-translate-y-0.5 sm:inline-flex"
+            className="bg-[image:var(--gradient-gold)] text-primary-foreground hidden rounded-full px-5 py-2.5 text-[0.78rem] font-bold tracking-wide shadow-[var(--shadow-gold)] transition-transform duration-300 hover:-translate-y-0.5 md:inline-flex"
           >
             {t.nav.ctaShort}
           </a>
