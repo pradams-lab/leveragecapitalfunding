@@ -131,8 +131,8 @@ export function SiteHeader() {
             <Phone className="h-3.5 w-3.5" />
             {PHONE}
           </a>
-          <LanguageToggle />
-          <ThemeToggle />
+          <LanguageToggle className="hidden lg:flex" />
+          <ThemeToggle className="hidden lg:inline-flex" />
 
           <a
             href="/#solicitar"
